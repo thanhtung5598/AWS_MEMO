@@ -7,8 +7,63 @@
   </head>
   <body>
     <div class="container">
+      <h1>Quan ly Lop hoc</h1> 
+      <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAddClass">
+        Create Class
+      </button>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Ma lop</th>
+            <th scope="col">Ten lop</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i< classes.length; i++) { %>
+            <tr style="">
+              <td><%=classes[i].class_id %></td>
+              <td><%=classes[i].tenLop %></td>
+              <td>
+                <a class="btn btn-danger mr-1" href="/classes/delete/<%=classes[i].class_id%>">Delete</a>
+                <a class="btn btn-success" href="/classes/update/<%=classes[i].class_id%>">Update</a</td>
+            </tr>
+          <%}%>
+        </tbody>
+      </table>
+        <!-- Modal create student -->
+        <div class="modal fade" id="modalAddClass" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new class</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="/classes/add" enctype="multipart/form-data" method="POST">
+                  <div class="form-group">
+                    <label for="">Ma lop</label>
+                    <input type="text" name="maLop" class="form-control" aria-describedby="">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Ten Lop</label>
+                    <input type="text" name="tenLop" class="form-control"  aria-describedby="">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add CLass</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="container">
       <h1>Quan ly sinh vien</h1> 
-      <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
+      <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAddStudent">
         Create Student
       </button>
       <table class="table table-hover">
@@ -19,6 +74,7 @@
             <th scope="col">Ma sinh vien</th>
             <th scope="col">Ten sinh vien</th>
             <th scope="col">Nam sinh</th>
+            <th scope="col">Ma Lop</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -30,6 +86,7 @@
               <td><%=students[i].student_id %></td>
               <td><%=students[i].student_name %></td>
               <td><%=students[i].student_birthdate%></td>
+              <td><%=students[i].id_lop %></td>
               <td>
                 <a class="btn btn-danger mr-1" href="/students/delete/<%=students[i].student_id%>">Delete</a>
                 <a class="btn btn-success" href="/students/update/<%=students[i].student_id%>">Update</a</td>
@@ -38,7 +95,7 @@
         </tbody>
       </table>
         <!-- Modal create student -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalAddStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -60,6 +117,14 @@
                   <div class="form-group">
                     <label for="">BirthDate</label>
                     <input type="text" name="birthdate" class="form-control"  aria-describedby="">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Ten Lop</label>
+                    <select class="form-control" id="id_lop" name="id_lop">
+                      <% for(let i = 0; i< classes.length; i++) { %>
+                      <option value="<%= classes[i].class_id%>"><%= classes[i].tenLop%></option>
+                      <% } %>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="">Avatar</label>

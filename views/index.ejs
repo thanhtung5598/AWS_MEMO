@@ -28,11 +28,11 @@
               <td><%=i %></td>
               <td><%if(students[i].avatar) {%><img style="width: 80px; height: 80px; border-radius: 100px;" class="img-thumbnail" src="<%= students[i].avatar%>" alt=""><%}%></td>
               <td><%=students[i].student_id %></td>
-              <td><%=students[i].name %></td>
-              <td><%=students[i].birthdate%></td>
+              <td><%=students[i].student_name %></td>
+              <td><%=students[i].student_birthdate%></td>
               <td>
                 <a class="btn btn-danger mr-1" href="/students/delete/<%=students[i].student_id%>">Delete</a>
-                <a class="btn btn-success" href="#" >Update</a</td>
+                <a class="btn btn-success" href="/students/update/<%=students[i].student_id%>">Update</a</td>
             </tr>
           <%}%>
         </tbody>

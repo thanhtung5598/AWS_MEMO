@@ -11,10 +11,11 @@
       <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">
         Create Student
       </button>
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">id</th>
+            <th scope="col">avatar</th>
             <th scope="col">Ma sinh vien</th>
             <th scope="col">Ten sinh vien</th>
             <th scope="col">Nam sinh</th>
@@ -23,8 +24,9 @@
         </thead>
         <tbody>
           <% for(let i = 0; i< students.length; i++) { %>
-            <tr>
+            <tr style="">
               <td><%=i %></td>
+              <td><%if(students[i].avatar) {%><img style="width: 80px; height: 80px; border-radius: 100px;" class="img-thumbnail" src="<%= students[i].avatar%>" alt=""><%}%></td>
               <td><%=students[i].student_id %></td>
               <td><%=students[i].name %></td>
               <td><%=students[i].birthdate%></td>
@@ -46,18 +48,22 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form action="/students/add" method="POST">
+                <form action="/students/add" enctype="multipart/form-data" method="POST">
                   <div class="form-group">
-                    <label for="">Ma sinh vien</label>
+                    <label for="">StudentID</label>
                     <input type="text" name="studentId" class="form-control" aria-describedby="">
                   </div>
                   <div class="form-group">
-                    <label for="">Ten sinh vien</label>
+                    <label for="">Name</label>
                     <input type="text" name="name" class="form-control"  aria-describedby="">
                   </div>
                   <div class="form-group">
-                    <label for="">Nam sinh</label>
+                    <label for="">BirthDate</label>
                     <input type="text" name="birthdate" class="form-control"  aria-describedby="">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Avatar</label>
+                    <input type="file" name="avatar" class="form-control-file" id="exampleFormControlFile1">  
                   </div>
                   <button type="submit" class="btn btn-primary">Add</button>
                 </form>
